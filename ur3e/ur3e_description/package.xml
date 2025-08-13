@@ -7,20 +7,16 @@
   <maintainer email="callab-b@todo.todo">callab-b</maintainer>
   <license>TODO: License declaration</license>
 
-  <depend>controller_manager</depend>
-  <depend>gz_ros2_control</depend>
-  <depend>ros_gz</depend>
-  <depend>ros_gz_bridge</depend>
-  <depend>ros_gz_sim</depend>
-  <depend>ros2_control</depend>
-  <depend>ros2_controllers</depend>
+  <depend>rviz2</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>joint_state_publisher_gui</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>xacro</depend>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-
-  <depend>ur_robot_driver</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

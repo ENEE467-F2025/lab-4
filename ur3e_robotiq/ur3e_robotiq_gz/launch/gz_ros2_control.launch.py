@@ -63,6 +63,11 @@ def launch_setup(context, *args, **kwargs):
         [FindPackageShare("ur3e_robotiq_description"), "rviz", "view_robot.rviz"]
     )
 
+    # get bridge config
+    bridge_config_file = PathJoinSubstitution(
+        [FindPackageShare("ur3e_robotiq_gz"), "config", "topics.yaml"]
+    )
+
 
     # nodes
     node_robot_state_publisher = Node(
@@ -115,16 +120,8 @@ def launch_setup(context, *args, **kwargs):
     bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=[
-            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            "/fixed/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-            "/fixed/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
-            "/fixed/image@sensor_msgs/msg/Image[gz.msgs.Image",
-            "/fixed/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked",
-            "/wrist/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
-            "/wrist/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
-            "/wrist/image@sensor_msgs/msg/Image[gz.msgs.Image",
-            "/wrist/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked",
+        parameters=[
+            {"config_file": bridge_config_file},
         ],
         output="screen"
     )

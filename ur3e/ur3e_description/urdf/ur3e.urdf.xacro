@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur3e">
+  
+  <xacro:arg name="table" default="true"/>
+
+   <!-- Import leap_right urdf file -->
+  <xacro:include filename="$(find ur3e_description)/urdf/ur3e.urdf"/>
+
+  <!-- Import control_xacro -->
+  <xacro:include filename="$(find ur3e_description)/config/ur3e.ros2_control.xacro"/>
+
+  <xacro:if value="$(arg table)">
+    <!-- Import table -->
+    <xacro:include filename="$(find ur3e_description)/urdf/table.urdf"/>
+
+    <!-- Joint between table and ur -->
+    <joint name="table_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="table"/>
+    </joint>
+  </xacro:if>
+</robot>

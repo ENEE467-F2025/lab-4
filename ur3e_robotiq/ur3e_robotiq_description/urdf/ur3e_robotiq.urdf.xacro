@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur3e_robotiq">
+
+    <!-- Import urdf -->
+    <xacro:include filename="$(find ur3e_robotiq_description)/urdf/ur3e_robotiq.urdf"/>
+
+    <!-- Import ros2_control xacro -->
+    <xacro:include filename="$(find ur3e_robotiq_description)/config/ur3e_robotiq.ros2_control.xacro"/>
+
+    <!-- Import table -->
+    <xacro:include filename="$(find ur3e_description)/urdf/table.urdf"/>
+
+    <!-- Joint between table and ur -->
+    <joint name="table_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="table"/>
+    </joint>
+
+    <!-- include sensors -->
+    <xacro:include filename="$(find ur3e_robotiq_description)/urdf/sensors.urdf.xacro"/>
+
+    <!-- Depth Cameras -->
+    <xacro:intel_d435 parent_link="base_link" name="fixed">
+        <origin xyz="-0.6 0.6 0.4" rpy="0.0 0.58 0.0"/>
+    </xacro:intel_d435>
+    <xacro:intel_d435 parent_link="tool0" name="wrist">
+        <origin xyz="0 -0.0635 0" rpy="0.0 -1.57079632679 1.57079632679"/>
+    </xacro:intel_d435>
+</robot>

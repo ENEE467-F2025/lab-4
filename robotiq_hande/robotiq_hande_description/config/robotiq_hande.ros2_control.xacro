@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <ros2_control name="robotiq_hande" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+        <joint name="robotiq_hande_left_finger_joint">
+            <command_interface name="position">
+                <param name="min">0.0</param>
+                <param name="max">0.025</param>
+            </command_interface>
+            <command_interface name="effort">
+                <param name="min">-130</param>
+                <param name="max">130</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.025</param>
+            </state_interface>
+            <state_interface name="effort"/>
+        </joint>
+    </ros2_control>
+</robot>

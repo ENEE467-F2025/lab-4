@@ -1,0 +1,127 @@
+<?xml version='1.0' ?>
+<sdf version="1.8">
+  <world name="pnp_ur_leap_demo">
+    <!-- ode, bullet, simbody, and dart. See http://sdformat.org/spec?ver=1.11&elem=physics#dart_collision_detector for contact solvers available through DART, Ignition's default dynamics engine-->
+    <physics name="default_physics" type='dart'>
+      <max_step_size>0.0025</max_step_size>
+      <real_time_factor>1.0</real_time_factor>      
+    </physics>
+
+    <!-- Define properties of the scene -->
+    <scene>
+      <ambient>0.35 0.35 0.35 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>false</shadows>
+      <grid>true</grid>
+      <origin_visual>true</origin_visual>
+    </scene>
+
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics">
+      <engine>
+          <filename>ignition-physics-dartsim-plugin</filename>
+      </engine>
+    </plugin>
+    <plugin name='ignition::gazebo::systems::SceneBroadcaster' filename='ignition-gazebo-scene-broadcaster-system' />
+    <plugin name='ignition::gazebo::systems::UserCommands' filename='ignition-gazebo-user-commands-system' />
+    <!-- <gui fullscreen='0'>
+      <plugin name='3D View' filename='GzScene3D'>
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <background_color>0.8 0.8 0.8 1.0</background_color>
+        <camera_pose>0.645 -0.2972 0.2 0 0.5299 0.57</camera_pose>
+        <camera_view_controller>orbit</camera_view_controller>
+        <camera_projection_type>perspective</camera_projection_type>
+        <camera_horizontal_fov>5</camera_horizontal_fov>
+        <camera_clip>
+          <near>0.1</near>
+          <far>0</far>
+        </camera_clip>
+    </plugin>
+    </gui> -->
+
+    <!-- Plugin for sensors like LiDAR -->
+    <!--For the rendering engine, changing the value enclosed in <render_engine> tags did not have an effect. If that is also your experience, you can force the change by carefully editing the file at file $HOME/.ignition/gazebo/6/gui.config-->
+    <!-- ogre2 is better than ogre; renders faster and displays default world artifacts-->
+    <plugin name='ignition::gazebo::systems::Sensors' filename='ignition-gazebo-sensors-system'>
+      <render_engine>ogre2</render_engine> 
+    </plugin>
+    <plugin name='ignition::gazebo::systems::Imu' filename='ignition-gazebo-imu-system'></plugin><!-- IMU -->
+
+    <!-- Include Contact plugin for collision sim -->
+    <plugin name='ignition::gazebo::systems::Contact' filename='ignition-gazebo-contact-system'/> 
+
+    <!-- Add realistic gravity and atmospheric effect simulation -->
+    <!-- <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/> -->
+
+    <!-- Add light source -->
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.1 -0.9</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+     <!-- Local Ground Plane with modified friction -->
+     <model name='ground_plane'>
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+      <link name='ground_plane_link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <torsional>
+                <coefficient>0</coefficient>
+              </torsional>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>10 10</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+    </model> 
+    
+    <joint name="ground_plane_joint" type="fixed">
+       <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+       <parent link="world"/>
+       <child link="ground_plane_link"/>
+     </joint>
+    
+  </world>
+</sdf>

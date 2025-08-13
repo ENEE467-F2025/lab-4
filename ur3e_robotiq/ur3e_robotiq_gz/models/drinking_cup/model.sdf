@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+    <model name="drinking_cup">
+        <static>false</static> <!-- Cup can move if needed -->
+        <pose>0 0 0 0 0 0</pose>
+        
+        <!-- Link -->
+        <link name="cup_link">
+            
+            <!-- Inertial properties: mass and inertia tensor -->
+            <inertial>
+                <mass>0.02</mass> <!-- 20g in kilograms -->
+                <inertia>
+                    <ixx>0.001</ixx> <!-- Approximated inertia values -->
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyy>0.001</iyy>
+                    <iyz>0.0</iyz>
+                    <izz>0.001</izz>
+                </inertia>
+            </inertial>
+
+            <!-- Visual properties -->
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://drinking_cup/meshes/drinking_cup.stl</uri>
+                        <scale>0.01 0.01 0.01</scale>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>0.1 0.1 0.1 1</ambient>
+                    <diffuse>0.1 0.1 0.2 1</diffuse>
+                    <specular>0 0 0 0</specular>
+                    <emissive>0 0 0 1</emissive>
+                </material>
+            </visual>
+
+            <!-- Collision properties -->
+            <collision name="collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://drinking_cup/meshes/drinking_cup.stl</uri>
+                        <scale>0.01 0.01 0.01</scale>
+                    </mesh>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>0.5</mu>
+                            <mu2>0.5</mu2>
+                        </ode>
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+    </model>
+</sdf>

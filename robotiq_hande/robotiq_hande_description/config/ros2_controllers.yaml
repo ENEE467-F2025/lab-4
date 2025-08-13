@@ -1,0 +1,21 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    robotiq_hande_controller:
+      type: position_controllers/JointGroupPositionController
+
+robotiq_hande_controller:
+  ros__parameters:
+    joints:
+      - robotiq_hande_left_finger_joint
+      # - robotiq_hande_right_finger_joint
+    interface_name: position
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position

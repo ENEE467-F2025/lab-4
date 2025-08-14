@@ -18,7 +18,7 @@
     <visual>
       <origin rpy="1.570796 0 1.570796" xyz="0.715 .9114 -.14"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/table.obj" scale="0.01 0.01 0.01"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/table.obj" scale="0.01 0.01 0.01"/>
       </geometry>
     </visual>
     <collision>
@@ -170,13 +170,13 @@
     <visual>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/base.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/base.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/base.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/base.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -190,13 +190,13 @@
     <visual>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/shoulder.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/shoulder.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 3.141592653589793" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/shoulder.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/shoulder.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -210,13 +210,13 @@
     <visual>
       <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.12"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/upperarm.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/upperarm.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.12"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/upperarm.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/upperarm.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -230,13 +230,13 @@
     <visual>
       <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.027"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/forearm.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/forearm.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.027"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/forearm.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/forearm.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -250,13 +250,13 @@
     <visual>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.104"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/wrist1.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/wrist1.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.104"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/wrist1.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/wrist1.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -270,13 +270,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 -0.08535"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/wrist2.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/wrist2.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 -0.08535"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/wrist2.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/wrist2.stl"/>
       </geometry>
     </collision>
     <inertial>
@@ -290,13 +290,13 @@
     <visual>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.0921"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/visual/wrist3.dae"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/visual/wrist3.dae"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.0921"/>
       <geometry>
-        <mesh filename="file:///home/ryan/Research/sim_ws/install/ur3e_description/share/ur3e_description/urdf/meshes/collision/wrist3.stl"/>
+        <mesh filename="file://$(find ur3e_robotiq_description)/urdf/meshes/collision/wrist3.stl"/>
       </geometry>
     </collision>
     <inertial>

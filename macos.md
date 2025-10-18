@@ -44,5 +44,5 @@
 
     Run the docker container making sure to set the display variable
     ```
-    $ docker compose -f lab-3-compose.yml run --rm -e DISPLAY=host.docker.internal:0 lab-3-docker
+    $ docker compose -f lab-4-compose.yml run --rm -e DISPLAY=host.docker.internal:0 lab-4-docker
     ```

@@ -42,6 +42,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
     ros-jazzy-rmw-cyclonedds-cpp \
     python3-pip \
     screen \
+    figlet \
+    toilet \
     && rm -rf /var/lib/apt/lists/*
 
 ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
@@ -77,8 +79,8 @@ ARG groupid=1002
 
 # setup user env
 RUN groupadd -g ${groupid} -o robot
-RUN useradd -ms /bin/bash --uid ${userid} -g ${groupid} --groups sudo,video robot \
-    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN useradd -ms /bin/bash --uid ${userid} -g ${groupid} --groups sudo,video robot && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER robot
 WORKDIR /home/robot
@@ -102,8 +104,12 @@ RUN source /opt/ros/jazzy/setup.bash \
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
     echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc && \
-    echo "export ROS_LOCALHOST_ONLY=1" >> ~/.bashrc && \
-    echo "alias clc=clear" >> ~/.bashrc
+    # echo "export ROS_LOCALHOST_ONLY=1" >> ~/.bashrc && \
+    echo "export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST" >> ~/.bashrc && \
+    echo "alias clc=clear" >> ~/.bashrc && \
+    # clear terminal when starting
+    echo "clear" >> ~/.bashrc && \
+    echo "toilet -f smblock --filter border:metal -w 24 ' ENEE 467     LAB 4'" >> ~/.bashrc
 
 # Setup tmux config
 ADD --chown=robot:robot https://raw.githubusercontent.com/MarylandRoboticsCenter/someConfigs/refs/heads/master/.tmux_K.conf /home/robot/.tmux.conf

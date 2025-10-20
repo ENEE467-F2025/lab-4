@@ -196,7 +196,7 @@ class SimplePlanner(Node):
                 "wrist_3_joint": sol[5]
             },
             N=50,
-            T=5.
+            tau=5.
         )
 
         self.get_logger().info("Publishing Computed Trajectory")
@@ -237,7 +237,7 @@ class SimplePlanner(Node):
         self,
         desired_js: dict[float], # of the form {"joint_name": value,}
         N: int=20,
-        T: float=10.
+        tau: float=10.
     ) -> JointTrajectory:
         """A simple planner that plans lines in joint space.
 
@@ -247,17 +247,19 @@ class SimplePlanner(Node):
         traj.points = [JointTrajectoryPoint() for _ in range(N)]
         traj.joint_names = list(self.ur3e_joint_states.keys())
 
-        dt = T/N
+        dt = tau/N
         
         # TODO (Ex. 2): create time stamps using np.linspace()
-        stamps = np.array([])
+        stamps = np.array([]) # MODIFY
         
         # TODO (Ex. 2): fill the traj.points field for the N trajectory points
         # using stamps from above
         for i in range(N):
-            traj.points[i].time_from_start.sec = 0.0 # m
-            nsec = 0.0 # ns
+            traj.points[i].time_from_start.sec = 0.0 # Equation (6)
+            nsec = 0.0 # ns; Equation (8)
             traj.points[i].time_from_start.nanosec = nsec
+
+        # DO NOT MODIFY ANY CODE BLOCKS BELOW
 
         for joint in self.ur3e_joint_states.keys():
             curr_js = self.ur3e_joint_states[joint]

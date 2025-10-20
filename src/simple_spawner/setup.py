@@ -16,6 +16,7 @@ setup(
         (os.path.join('share', package_name, 'rviz'), ['rviz/view_tf.rviz']),
         (os.path.join('share', package_name, 'rviz'), ['rviz/base.rviz']),
         (os.path.join('share', package_name, 'launch'), ['launch/spawner.launch.py']),
+        (os.path.join('share', package_name, 'models'), ['models/cuboid.sdf']),
         (os.path.join('share', package_name, 'models', 'cuboid'), [
             'models/cuboid/model.config',
             'models/cuboid/model.sdf',

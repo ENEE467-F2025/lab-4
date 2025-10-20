@@ -71,7 +71,8 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-ros2-controllers \
     ros-jazzy-ros-gz-bridge \
     ros-jazzy-gz-ros2-control \
-    ros-jazzy-foxglove-bridge
+    ros-jazzy-foxglove-bridge \
+    ros-jazzy-joint-state-publisher-gui 
 
 RUN apt-get update \
     && apt-get install -y ros-jazzy-gz-*

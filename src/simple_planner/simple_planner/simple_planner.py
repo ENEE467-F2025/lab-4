@@ -17,8 +17,8 @@ from sensor_msgs.msg import JointState
 from geometry_msgs.msg import Pose
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
-# from simple_planner.ur3e_robotiq import UR3eRobotiq
-from ur3e_robotiq import UR3eRobotiq
+from simple_planner.ur3e_robotiq import UR3eRobotiq
+# from ur3e_robotiq import UR3eRobotiq
 
 from interactive_markers import InteractiveMarkerServer
 from visualization_msgs.msg import (
@@ -159,22 +159,20 @@ class SimplePlanner(Node):
             self.get_logger().info("No Joint State Information Recieved")
             return
         
-        # compute IK to get joint states
-        T1 = sm.SE3.Trans(
-            self.goal_pose.position.x,
-            self.goal_pose.position.y,
-            self.goal_pose.position.z
-        )
-        T2 = sm.UnitQuaternion(
-            s=self.goal_pose.orientation.w,
-            v=[
-                self.goal_pose.orientation.x,
-                self.goal_pose.orientation.y,
-                self.goal_pose.orientation.z
-            ]
-        ).SE3()
+        # TODO (Ex. 2): compute IK to get joint states
+        # TODO: get translation component of goal_pose class variable
+        T1 = sm.SE3()
 
-        T = T1*T2
+        # TODO: get orientation component of goal_pose class variable
+        # sm.UnitQuaternion takes two arguments:
+        # a scalar part (s) and a three-dimensional array (v)
+        # set each to the respective object from goal_pose
+
+        T2 = sm.UnitQuaternion().SE3() # cast to SE3
+
+        # TODO: Compose translational and rotational components to get final
+        # SE3
+        T = sm.SE3() # 
 
         try:
             sol=self.model.ik_LM(
@@ -250,12 +248,15 @@ class SimplePlanner(Node):
         traj.joint_names = list(self.ur3e_joint_states.keys())
 
         dt = T/N
-        stamps = np.linspace(dt, T, N)
-
-        # time stamps
+        
+        # TODO (Ex. 2): create time stamps using np.linspace()
+        stamps = np.array([])
+        
+        # TODO (Ex. 2): fill the traj.points field for the N trajectory points
+        # using stamps from above
         for i in range(N):
-            traj.points[i].time_from_start.sec = int(stamps[i])
-            nsec = int(stamps[i]%1*1e9)
+            traj.points[i].time_from_start.sec = 0.0 # m
+            nsec = 0.0 # ns
             traj.points[i].time_from_start.nanosec = nsec
 
         for joint in self.ur3e_joint_states.keys():

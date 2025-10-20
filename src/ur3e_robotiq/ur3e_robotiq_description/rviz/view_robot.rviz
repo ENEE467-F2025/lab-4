@@ -169,6 +169,15 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/InteractiveMarkers
+      Enable Transparency: true
+      Enabled: true
+      Interactive Markers Namespace: /ee_pose
+      Name: InteractiveMarkers
+      Show Axes: false
+      Show Descriptions: true
+      Show Visual Aids: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -222,18 +231,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.17383958399295807
-        Y: -0.08692345768213272
-        Z: 0.27703985571861267
+        X: 0.08376764506101608
+        Y: -0.2810591757297516
+        Z: 0.22189635038375854
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4903982877731323
+      Pitch: 0.7703981399536133
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.0253980159759521
+      Yaw: 1.4253976345062256
     Saved: ~
 Window Geometry:
   Displays:

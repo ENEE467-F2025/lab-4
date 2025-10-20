@@ -4,7 +4,7 @@ This SDF file was automatically generated using a template modified
 and authored by Adwait Naik. The moment of interia is not supposed to be changed.
 -->
 <sdf version="1.7">
-    <model name="potted_meat_can">
+    <model name="spam_can">
       <pose>1.0 2.0 2.0 0 0 0</pose> 
       <link name="link">
         <inertial>

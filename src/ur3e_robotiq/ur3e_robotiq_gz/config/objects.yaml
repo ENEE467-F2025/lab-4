@@ -2,3 +2,23 @@ objects:
   cordless_drill:
     xyz: [0.25, 0.25, 1.]
     rpy: [0.0, 0.0, 0.0]
+
+  aruco_cube_80:
+    xyz: [0.5, 0.0, 1.]
+    rpy: [0.0, 0.0, 0.0]
+
+  ecoforms_container:
+    xyz: [0.0, -0.5, 1.]
+    rpy: [0.0, 0.0, 0.0]
+
+  bolt:
+    xyz: [-0.5, 0.0, 1.]
+    rpy: [0.0, 0.0, 0.0]
+
+  coke_can:
+    xyz: [0.0, 0.5, 1.]
+    rpy: [0.0, 0.0, 0.0]
+
+  spam_can:
+    xyz: [0.0, 0.0, 1.]
+    rpy: [0.0, 0.0, 0.0]

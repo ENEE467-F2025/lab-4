@@ -73,6 +73,17 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-gz-ros2-control \
     ros-jazzy-foxglove-bridge
 
+RUN apt-get update \
+    && apt-get install -y ros-jazzy-gz-*
+
+# Add OSRF Gazebo repository and key, then install Gazebo development library
+# needed for gz completions
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg lsb-release ca-certificates curl && \
+    curl -fsSL https://packages.osrfoundation.org/gazebo.gpg -o /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list && \
+    apt-get update && apt-get install -y libgz-tools2-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 # defaults
 ARG userid=1002
 ARG groupid=1002
@@ -86,12 +97,13 @@ USER robot
 WORKDIR /home/robot
 
 # ROS_LOCALHOST_ONLY is deprecated
+# LIBGL_ALWAYS_SOFTWARE=1 causes performance issues with Gazebo rendering
 ENV USER=robot \
     LANG=en_US.UTF-8 \
     ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST \
     HOME=/home/robot \
     XDG_RUNTIME_DIR=/run/user/${userid} \
-    LIBGL_ALWAYS_SOFTWARE=1 \
+    LIBGL_ALWAYS_SOFTWARE=0 \
     TZ=America/New_York
 
 RUN sudo mkdir -p -m 0700 /run/user/${userid} && \
@@ -104,8 +116,14 @@ RUN source /opt/ros/jazzy/setup.bash \
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
     echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc && \
     echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc && \
+    # segmentation fault workaround
+    echo "export QT_QPA_PLATFORM=xcb" >> ~/.bashrc && \
+    # autocompletion for Gazebo CLI
+    echo "source /usr/share/bash-completion/completions/gz" >> ~/.bashrc && \
     # echo "export ROS_LOCALHOST_ONLY=1" >> ~/.bashrc && \
     echo "export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST" >> ~/.bashrc && \
+    echo "export GZ_VERSION=harmonic" >> ~/.bashrc && \
+    echo "export GZ_SIM_RESOURCE_PATH=\$HOME/ros2_ws/src/ur3e_robotiq/ur3e_robotiq_gz/models:\$HOME/ros2_ws/src/simple_spawner/models:\$GZ_SIM_RESOURCE_PATH" >> ~/.bashrc && \
     echo "alias clc=clear" >> ~/.bashrc && \
     # clear terminal when starting
     echo "clear" >> ~/.bashrc && \

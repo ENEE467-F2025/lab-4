@@ -14,7 +14,7 @@ import roboticstoolbox as rtb
 import spatialmath as sm
 
 from sensor_msgs.msg import JointState
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseStamped
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 import transforms3d as t3d
 from numpy.typing import NDArray
@@ -74,7 +74,7 @@ class SimplePlanner(Node):
         super().__init__("simple_planner")
 
         # goal pose
-        self.goal_pose: Pose = None
+        self.goal_pose: PoseStamped = None
 
         # class variable for storing current joint states
         self.ur3e_joint_states: dict = {}
@@ -171,7 +171,7 @@ class SimplePlanner(Node):
         if self.ur3e_joint_states is None:
             self.get_logger().info("No Joint State Information Recieved")
             return
-               
+                
         # TODO (Ex. 2): compute IK to get joint states
         # TODO: get translation component of goal_pose class variable
         T1 = sm.SE3()
@@ -260,8 +260,9 @@ class SimplePlanner(Node):
         """Update goal pose whenever the interactive marker is moved."""
         if feedback.pose is not None:
             self.get_logger().info("Goal Pose Received, press Enter to execute")
-            feedback_msg = Pose()
-            feedback_msg = feedback.pose
+            feedback_msg = PoseStamped()
+            feedback_msg.pose = feedback.pose
+            feedback_msg.header = feedback.header
             self.goal_pose = feedback_msg
 
     def joint_state_callback(self, msg: JointState):
@@ -322,6 +323,36 @@ class SimplePlanner(Node):
 
 
         return traj
+
+def pose_stamped_to_se3(pose_stamped_obj: PoseStamped) -> NDArray:
+    """
+    Helper function to convert a PoseStamped message to a 4x4 SE3 transformation matrix.
+    """
+    trans = [pose_stamped_obj.pose.position.x, pose_stamped_obj.pose.position.y, pose_stamped_obj.pose.position.z]
+    quat = np.array([pose_stamped_obj.pose.orientation.w,
+                     pose_stamped_obj.pose.orientation.x,
+                     pose_stamped_obj.pose.orientation.y,
+                     pose_stamped_obj.pose.orientation.z], dtype=float)
+    if np.linalg.norm(quat) == 0:
+        quat = np.array([1., 0., 0., 0.])
+    else:
+        quat = quat / np.linalg.norm(quat)
+
+    R_mat = t3d.quaternions.quat2mat(quat)
+    # re-orthonormalize rotation to avoid numerical drift
+    try:
+        U, _, Vt = np.linalg.svd(R_mat)
+        R_orth = U @ Vt
+        if np.linalg.det(R_orth) < 0:
+            U[:, -1] *= -1
+            R_orth = U @ Vt
+        R_mat = R_orth
+    except Exception:
+        pass
+    T = np.eye(4)
+    T[:3, :3] = R_mat
+    T[:3, 3] = trans
+    return T  
 
 def compute_se3_error(T_desired, T_actual, w_trans=1.0, w_rot=1.0):
     """Compute combined SE3 error as weighted translation + rotation magnitude

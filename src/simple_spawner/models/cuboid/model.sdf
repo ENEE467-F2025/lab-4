@@ -2,7 +2,7 @@
 <!-- Copy for Gazebo -->
 <sdf version="1.6">
     <model name="cuboid">
-    <pose>0 0 0.05 0 0 0</pose> <!-- z = half the height to raise the  from the ground -->
+    <pose>0 0 0.05 0 0 0</pose> <!-- vertical offset from ground plane -->
         <link name="link">
             <visual name="visual">
                 <geometry>

@@ -4,8 +4,8 @@
   <name>simple_spawner</name>
   <version>0.0.0</version>
   <description>Simple spawner for GZ Harmonic.</description>
-  <maintainer email="enwerem@terpmail.umd.edu">drce</maintainer>
-  <license>BSD</license>
+  <maintainer email="enwerem@terpmail.umd.edu">Clinton Enwerem</maintainer>
+  <license>Apache-2.0</license>
 
   <depend>rclpy</depend>
   <depend>geometry_msgs</depend>

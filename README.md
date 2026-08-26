@@ -26,7 +26,7 @@ To build the Docker container, ensure that you have [Docker](https://www.docker.
     ```
 * Build the image with Docker compose
     ```
-    userid=$(id -u) groupid=$(id -g) docker compose -f lab-4-compose.yml build
+    docker compose -f lab-4-compose.yml build
     ```
 
 ## Starting the Container
@@ -48,7 +48,7 @@ The lab computers contain a prebuild image so you will not have to build the ima
     ```
 * Once inside the container, you should be greeted with the following prompt indicating that the container is running
     ```
-    robot@docker-desktop:~$
+    robot@desktop:~$
     ```
 
 ## Lab Instructions
